@@ -1,0 +1,20 @@
+{
+    "name": "thetwelvelabs/techne",
+    "description": "Finite State Machine implementation",
+    "keywords": ["finite-state machine", "FSM"],
+    "homepage": "http://thetwelvelabs.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Woodford",
+            "email": "chris.woodford@gmail.com",
+            "homepage": "http://ideapatterns.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": { "TheTwelve\\Techne\\": "lib" }
+    }
+}

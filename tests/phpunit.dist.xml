@@ -1,0 +1,15 @@
+<phpunit bootstrap="./bootstrap.php">
+
+    <php>
+        <includePath></includePath>
+    </php>
+        
+    <testsuites>
+    
+        <testsuite name="FSM Test Suite">
+            <file>./lib/TheTwelve/Techne/StateMachine/FiniteStateMachineTest.php</file>
+        </testsuite>
+        
+    </testsuites>
+        
+</phpunit>
