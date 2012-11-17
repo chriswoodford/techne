@@ -6,28 +6,28 @@ use TheTwelve\Techne;
 
 class FiniteStateMachine implements Techne\StateMachine
 {
-    
-    /** 
+
+    /**
      * the current state of this machine
      * @var TheTwelve\Techne\State
      */
     protected $state;
 
     /**
-     * a list of available events 
+     * a list of available events
      * @var unknown_type
      */
     protected $events;
-    
+
     /**
      * (non-PHPdoc)
      * @see TheTwelve\Techne.StateMachine::getCurrentState()
      */
     public function getCurrentState()
     {
-        
+
         return $this->state;
-        
+
     }
 
     /**
@@ -36,9 +36,9 @@ class FiniteStateMachine implements Techne\StateMachine
      */
     public function addEvent($name, array $transitions)
     {
-        
+
         $this->events[$name] = $transitions;
-        
+
     }
 
     /**
@@ -47,12 +47,12 @@ class FiniteStateMachine implements Techne\StateMachine
      */
     public function setDefaultState($state)
     {
-        
+
         $this->state = $state;
-        
+
     }
-    
-    /** 
+
+    /**
      * catch messages passed to this machine and treat them as events
      * @param string $name
      * @param array $arguments
@@ -61,7 +61,7 @@ class FiniteStateMachine implements Techne\StateMachine
      */
     public function __call($name, $arguments)
     {
-        
+
         if (!array_key_exists($name, $this->events)) {
             throw new Techne\InvalidEventException(
                 'Event [' . $name . '] does not exist'
@@ -78,7 +78,7 @@ class FiniteStateMachine implements Techne\StateMachine
         }
 
         $this->state = $transitions[(string)$this->state];
-        
+
     }
-    
+
 }
