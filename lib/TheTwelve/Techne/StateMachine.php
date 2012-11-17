@@ -19,9 +19,9 @@ interface StateMachine
     public function addEvent($name, array $transitions);
 
     /**
-     * set the default state for the machine
+     * set the initial state for the machine
      * @param string $state
      */
-    public function setDefaultState($state);
+    public function setInitialState($state);
 
 }

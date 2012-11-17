@@ -43,9 +43,9 @@ class FiniteStateMachine implements Techne\StateMachine
 
     /**
      * (non-PHPdoc)
-     * @see TheTwelve\Techne.StateMachine::setDefaultState()
+     * @see TheTwelve\Techne.StateMachine::setInitialState()
      */
-    public function setDefaultState($state)
+    public function setInitialState($state)
     {
 
         $this->state = $state;
@@ -72,7 +72,7 @@ class FiniteStateMachine implements Techne\StateMachine
 
         if (!array_key_exists((string)$this->state, $transitions)) {
             throw new Techne\InvalidTransitionException(
-                'Machine cannot transitions from '
+                'Machine cannot transition from '
                 . '[' . $this->state . '] after [' . $name . ']'
             );
         }

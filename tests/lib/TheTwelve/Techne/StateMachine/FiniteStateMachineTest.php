@@ -13,7 +13,7 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
 
         $machine = new StateMachine\FiniteStateMachine();
         $machine->addEvent('flip', array('on' => 'off', 'off' => 'on'));
-        $machine->setDefaultState('off');
+        $machine->setInitialState('off');
 
         $this->assertEquals('off', $machine->getCurrentState());
 
@@ -43,7 +43,7 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
         $machine->addEvent('drive', array('idling' => 'driving'));
         $machine->addEvent('stop', array('driving' => 'idling'));
         $machine->addEvent('park', array('idling' => 'parked'));
-        $machine->setDefaultState('parked');
+        $machine->setInitialState('parked');
 
         $this->assertEquals('parked', $machine->getCurrentState());
 
