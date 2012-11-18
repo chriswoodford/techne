@@ -14,9 +14,9 @@ interface StateMachine
     /**
      * add an event and the allowed transitions
      * @param string $name
-     * @param array $transitions
+     * @param array|TheTwelve\Techne\Transition $transitions
      */
-    public function addEvent($name, array $transitions);
+    public function addEvent($name, $transitions);
 
     /**
      * set the initial state for the machine

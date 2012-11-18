@@ -34,8 +34,12 @@ class FiniteStateMachine implements Techne\StateMachine
      * (non-PHPdoc)
      * @see TheTwelve\Techne.StateMachine::addEvent()
      */
-    public function addEvent($name, array $transitions)
+    public function addEvent($name, $transitions)
     {
+
+    	if ($transitions instanceof \TheTwelve\Techne\Transition) {
+    		$transitions = array($transitions);
+    	}
 
         $this->events[$name] = $transitions;
         return $this;
@@ -70,18 +74,28 @@ class FiniteStateMachine implements Techne\StateMachine
             );
         }
 
-
-
         $transitions = $this->events[$name];
+        $transition = null;
 
-        if (!array_key_exists((string)$this->state, $transitions)) {
+        foreach ($transitions as $t) {
+
+        	$transition = $t->initialStateIs($this->state)
+        		? $t : null;
+
+            if (!is_null($transition)) {
+            	break;
+            }
+
+        }
+
+        if (!$transition) {
             throw new Techne\InvalidTransitionException(
                 'Machine cannot transition from '
                 . '[' . $this->state . '] after [' . $name . ']'
             );
         }
 
-        $this->state = $transitions[(string)$this->state];
+        $this->state = $transition->process();
 
     }
 
