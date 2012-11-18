@@ -2,5 +2,5 @@
 
 namespace TheTwelve\Techne;
 
-class InvalidTransitionException extends \Exception
+class InvalidTransitionException extends \LogicException
 {}

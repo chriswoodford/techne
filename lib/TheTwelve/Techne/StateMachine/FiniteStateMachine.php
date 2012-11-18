@@ -38,6 +38,7 @@ class FiniteStateMachine implements Techne\StateMachine
     {
 
         $this->events[$name] = $transitions;
+        return $this;
 
     }
 
@@ -49,6 +50,7 @@ class FiniteStateMachine implements Techne\StateMachine
     {
 
         $this->state = $state;
+        return $this;
 
     }
 
@@ -67,6 +69,8 @@ class FiniteStateMachine implements Techne\StateMachine
                 'Event [' . $name . '] does not exist'
             );
         }
+
+
 
         $transitions = $this->events[$name];
 
