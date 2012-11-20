@@ -31,6 +31,18 @@ class FiniteStateMachine implements Techne\StateMachine
     }
 
     /**
+     * returns true if the FSM's current state is the
+     * same as the supplied state
+     * @param TheTwelve\Techne\State $state
+     */
+    public function is($state)
+    {
+
+    	return $this->state == $state;
+
+    }
+
+    /**
      * (non-PHPdoc)
      * @see TheTwelve\Techne.StateMachine::addEvent()
      */

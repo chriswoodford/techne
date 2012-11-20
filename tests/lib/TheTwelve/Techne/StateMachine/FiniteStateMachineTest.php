@@ -17,7 +17,7 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
         // flipping the switch on requires electricity
         $hasElectricity = true;
         $turnOn->before(function() use ($hasElectricity) {
-        	return $hasElectricity ? true : false;
+            return $hasElectricity ? true : false;
         });
 
         $machine = new StateMachine\FiniteStateMachine();
@@ -25,12 +25,15 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
         $machine->setInitialState('off');
 
         $this->assertEquals('off', $machine->getCurrentState(), 'Incorrect initial state for light switch');
+        $this->assertTrue($machine->is('off'));
 
         $machine->flip();
         $this->assertEquals('on', $machine->getCurrentState(), 'Could not turn lights on');
+        $this->assertTrue($machine->is('on'));
 
         $machine->flip();
         $this->assertEquals('off', $machine->getCurrentState(), 'Could not turn lights off');
+		$this->assertTrue($machine->is('off'));
 
         $this->setExpectedException('TheTwelve\Techne\InvalidEventException');
         $machine->foo();
