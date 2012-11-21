@@ -33,7 +33,7 @@ class Transition implements \TheTwelve\Techne\Transition
 
 	/**
 	 * initialize the transition
-	 * @param TheTwelve\State $from
+	 * @param TheTwelve\State|array $from
 	 * @param TheTwelve\State $to
 	 */
 	public function __construct($from, $to)
@@ -49,7 +49,13 @@ class Transition implements \TheTwelve\Techne\Transition
 	 */
 	public function __toString()
 	{
+
+		if (is_array($this->initialState)) {
+			return '[' . join(', ', $this->initialState) . '] -> ' . $this->transitionState;
+		}
+
 		return $this->initialState . ' -> ' . $this->transitionedState;
+
 	}
 
 	/**

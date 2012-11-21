@@ -70,6 +70,7 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
         $machine->setInitialState('parked');
 
         $this->assertEquals('parked', $machine->getCurrentState());
+        $this->assertTrue($machine->is('parked'));
 
         // cannot go from parked to driving
         $this->setExpectedException('TheTwelve\Techne\InvalidTransitionException');
@@ -77,19 +78,24 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
 
         $machine->start();
         $this->assertEquals('idling', $machine->getCurrentState());
+        $this->assertTrue($machine->is('idling'));
 
         $machine->park();
         $this->assertEquals('parked', $machine->getCurrentState());
+        $this->assertTrue($machine->is('parked'));
 
         $machine->start();
         $machine->drive();
         $this->assertEquals('driving', $machine->getCurrentState());
+        $this->assertTrue($machine->is('driving'));
 
         $machine->stop();
         $this->assertEquals('idling', $machine->getCurrentState());
+        $this->assertTrue($machine->is('idling'));
 
         $machine->park();
         $this->assertEquals('parked', $machine->getCurrentState());
+        $this->assertTrue($machine->is('parked'));
 
         $this->setExpectedException('TheTwelve\Techne\InvalidEventException');
         $machine->foo();
