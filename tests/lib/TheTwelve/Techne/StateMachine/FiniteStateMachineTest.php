@@ -96,4 +96,52 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
 
     }
 
+    public function testEating()
+    {
+
+    	// let's say humans have 4 states as a result of eating
+    	// hungry, satisfied, full, and sick
+
+        $eatOnce = new StateMachine\Transition('hungry', 'satisfied');
+        $eatTwice = new StateMachine\Transition('satisfied', 'full');
+        $eatThrice = new StateMachine\Transition('full', 'sick');
+        $rest = new StateMachine\Transition(array('satisfied', 'full', 'sick'), 'hungry');
+
+        $machine = new StateMachine\FiniteStateMachine();
+        $machine->addEvent('eat', array($eatOnce, $eatTwice, $eatThrice));
+        $machine->addEvent('rest', $rest);
+        $machine->setInitialState('hungry');
+
+        $this->assertEquals('hungry', $machine->getCurrentState());
+        $this->assertTrue($machine->is('hungry'));
+
+        $machine->eat();
+        $this->assertEquals('satisfied', $machine->getCurrentState());
+        $this->assertTrue($machine->is('satisfied'));
+
+        $machine->rest();
+        $this->assertEquals('hungry', $machine->getCurrentState());
+        $this->assertTrue($machine->is('hungry'));
+
+        $machine->eat();
+        $machine->eat();
+        $this->assertEquals('full', $machine->getCurrentState());
+        $this->assertTrue($machine->is('full'));
+
+        $machine->rest();
+        $this->assertEquals('hungry', $machine->getCurrentState());
+        $this->assertTrue($machine->is('hungry'));
+
+        $machine->eat();
+        $machine->eat();
+        $machine->eat();
+        $this->assertEquals('sick', $machine->getCurrentState());
+        $this->assertTrue($machine->is('sick'));
+
+        $machine->rest();
+        $this->assertEquals('hungry', $machine->getCurrentState());
+        $this->assertTrue($machine->is('hungry'));
+
+    }
+
 }

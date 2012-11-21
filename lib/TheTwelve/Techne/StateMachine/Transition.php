@@ -60,6 +60,10 @@ class Transition implements \TheTwelve\Techne\Transition
 	public function initialStateIs($state)
 	{
 
+		if (is_array($this->initialState)) {
+			return in_array($state, $this->initialState);
+		}
+
 		return $this->initialState == $state;
 
 	}
