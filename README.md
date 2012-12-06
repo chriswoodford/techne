@@ -40,16 +40,20 @@ that the initial state of the light switch is 'off'
 
 ### Define the transitions
 
-        $turnOff = new StateMachine\Transition('on', 'off');
-        $turnOn = new StateMachine\Transition('off', 'on');
+      $turnOff = new StateMachine\Transition('on', 'off');
+      $turnOn = new StateMachine\Transition('off', 'on');
         
 ### Add a guard to the turnOn transition
 
-        // flipping the switch on requires electricity
-        $hasElectricity = true;
-        $turnOn->before(function() use ($hasElectricity) {
-            return $hasElectricity ? true : false;
-        });
+      // flipping the switch on requires electricity
+      $hasElectricity = true;
+      $turnOn->before(function() use ($hasElectricity) {
+          return $hasElectricity ? true : false;
+      });
+
+## Define the events
+
+      $machine->addEvent('flip', array($turnOn, $turnOff));
 
 ### Transition from off to on
 
