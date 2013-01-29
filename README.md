@@ -12,9 +12,8 @@ Use [Composer](http://getcomposer.org) to install this library in your project
 
       {
           "require": {
-              "thetwelvelabs/techne": "dev-master"
-          },
-          "minimum-stability": "dev"
+              "thetwelvelabs/techne": "0.2.*@dev"
+          }
       }
 
 ### Download composer into your application root
