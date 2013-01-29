@@ -148,6 +148,22 @@ class TheTwelve_Techne_StateMachine_FiniteStateMachineTest
         $this->assertEquals('hungry', $machine->getCurrentState());
         $this->assertTrue($machine->is('hungry'));
 
+        // Issue #2 - Bug with multiple source states
+        $machine->eat();
+        $machine->eat();
+        $this->assertEquals('full', $machine->getCurrentState());
+        $this->assertTrue($machine->is('full'));
+
+        $currentState = $machine->getCurrentState();
+
+        $rest->before(function() {
+            return false;
+        });
+
+        $machine->rest();
+        $this->assertFalse(is_array($machine->getCurrentState()));
+        $this->assertEquals($currentState, $machine->getCurrentState());
+
     }
 
 }

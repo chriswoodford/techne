@@ -9,13 +9,13 @@ class FiniteStateMachine implements Techne\StateMachine
 
     /**
      * the current state of this machine
-     * @var TheTwelve\Techne\State
+     * @var \TheTwelve\Techne\State
      */
     protected $state;
 
     /**
      * a list of available events
-     * @var unknown_type
+     * @var array
      */
     protected $events;
 
@@ -33,7 +33,7 @@ class FiniteStateMachine implements Techne\StateMachine
     /**
      * returns true if the FSM's current state is the
      * same as the supplied state
-     * @param TheTwelve\Techne\State $state
+     * @param \TheTwelve\Techne\State $state
      */
     public function is($state)
     {
@@ -74,8 +74,8 @@ class FiniteStateMachine implements Techne\StateMachine
      * catch messages passed to this machine and treat them as events
      * @param string $name
      * @param array $arguments
-     * @throws InvalidEventException
-     * @throws InvalidTransitionException
+     * @throws \TheTwelve\Techne\InvalidEventException
+     * @throws \TheTwelve\Techne\InvalidTransitionException
      */
     public function __call($name, $arguments)
     {
@@ -107,7 +107,8 @@ class FiniteStateMachine implements Techne\StateMachine
             );
         }
 
-        $this->state = $transition->process();
+        $newState = $transition->process();
+        $this->state = $newState ? $newState : $this->state;
 
     }
 

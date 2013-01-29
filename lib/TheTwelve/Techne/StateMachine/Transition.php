@@ -7,13 +7,13 @@ class Transition implements \TheTwelve\Techne\Transition
 
 	/**
 	 * the initial state, before the transition
-	 * @var TheTwelve\State
+	 * @var TheTwelve\Techne\State
 	 */
 	protected $initialState;
 
 	/**
      * the state after the transition
-     * @var TheTwelve\State
+     * @var TheTwelve\Techne\State
 	 */
 	protected $tansitionedState;
 
@@ -33,8 +33,8 @@ class Transition implements \TheTwelve\Techne\Transition
 
 	/**
 	 * initialize the transition
-	 * @param TheTwelve\State|array $from
-	 * @param TheTwelve\State $to
+	 * @param TheTwelve\Techne\State|array $from
+	 * @param TheTwelve\Techne\State $to
 	 */
 	public function __construct($from, $to)
 	{
@@ -61,7 +61,8 @@ class Transition implements \TheTwelve\Techne\Transition
 	/**
 	 * returns true if the supplied state matches the initial state
 	 * of this transition
-	 * @param TheTwelve\State $state
+	 * @param \TheTwelve\Techne\State $state
+	 * @return boolean
 	 */
 	public function initialStateIs($state)
 	{
@@ -77,13 +78,13 @@ class Transition implements \TheTwelve\Techne\Transition
 	/**
 	 * process the transition. returns the state after the transition has been
 	 * performed
-	 * @return TheTwelve\State
+	 * @return \TheTwelve\Techne\State
 	 */
 	public function process()
 	{
 
 		if ($this->beforeTransition && !$this->beforeTransition()) {
-			return $this->initialState;
+			return false;
 		}
 
 		if ($this->afterTransition) {
@@ -97,6 +98,7 @@ class Transition implements \TheTwelve\Techne\Transition
 	/**
 	 * a guard check to be attempted before processing a transition
 	 * @param \Closure $function
+	 * @return \TheTwelve\Techne\Transition
 	 */
 	public function before(\Closure $function)
 	{
@@ -109,6 +111,7 @@ class Transition implements \TheTwelve\Techne\Transition
 	/**
 	 * a function run after the transition has been processed
 	 * @param \Closure $function
+	 * @return \TheTwelve\Techne\Transition
 	 */
 	public function after(\Closure $function)
 	{
@@ -136,4 +139,3 @@ class Transition implements \TheTwelve\Techne\Transition
     }
 
 }
-
